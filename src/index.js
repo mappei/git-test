@@ -1,19 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import TreeNode from './treeNode';
 
+/*
 class Square extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            value: null,
-        };
-    }
-
     render() {
       return (
-        <button className="square" onClick={() => this.setState({value: 'x'})}>
-          {this.state.value}
+        <button className="square" onClick={() => this.props.onClick()}>
+          {this.props.value}
         </button>
       );
     }
@@ -28,14 +23,21 @@ class Board extends React.Component {
         };
     }
 
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        this.setState({squares: squares});
+    }
+
     renderSquare(i) {
         return (
-            <Square value={this.state.squares[i]}
-            onClick={() => this.handleClick(i)}
+            <Square
+                value={this.state.squares[i]}
+                onClick={() => this.handleClick(i)}
             />
         );
     }
-//https://react.docschina.org/tutorial/tutorial.html#%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A0%81
+
     render() {
         const status = 'Next player: X';
 
@@ -70,8 +72,8 @@ render() {
         <Board />
         </div>
         <div className="game-info">
-        <div>{/* status */}</div>
-        <ol>{/* TODO */}</ol>
+        <div>{/!* status *!/}</div>
+        <ol>{/!* TODO *!/}</ol>
         </div>
     </div>
     );
@@ -79,8 +81,95 @@ render() {
 }
 
 // ========================================
-
+*/
+const node = [{
+    title: '00000',
+    key: '0' ,
+    child:[
+        {
+            title: '0-111111',
+            key: '0-0',
+            child:[
+                {
+                    title: '0-1-1111',
+                    key: '0-0-0'
+                },
+                {
+                    title: '0-1-2222',
+                    key: '0-0-1',
+                    child: [
+                        {
+                            title: '0-1-2-11111',
+                            key: '0-0-1-0',
+                            child: [
+                                {
+                                    title: '0-1-2-1-111',
+                                    key: '0-0-1-0-0'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: '0-1-33333',
+                    key: '0-0-4'
+                },
+            ]
+        },
+        {
+            title: '0-222222',
+            key: '0-2',
+            level:'level2',
+            open: false,
+            child: [
+                {
+                    title: '0-2-1111',
+                    key: '0-2-0',
+                    level:'level3',
+                },
+                {
+                    title: '0-2-22222',
+                    key: '0-2-1',
+                    level:'level3',
+                },
+                {
+                    title: '0-2-33333',
+                    key: '0-2-2',
+                    level:'level3',
+                }
+            ]
+        }
+    ]
+}];
+const data = [
+    {
+        title: "First",
+        id: "1",
+        children: [
+            {
+                title: "First - 1.1",
+                id: "1.1"
+            }, {
+                title: "First - 1.2",
+                id: "1.2",
+                children: [{
+                    title: "First - 1.2.1",
+                    id: "1.2.1"
+                }]
+            }
+        ]
+    }, {
+        title: "Second",
+        id: "2",
+        children: [
+            {
+                title: "Second - 2.1",
+                id:"2.1"
+            }
+        ]
+    }
+];
 ReactDOM.render(
-<Game />,
-document.getElementById('root')
+    <TreeNode data={node}/>,
+    document.getElementById('root')
 );
